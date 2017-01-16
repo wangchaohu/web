@@ -1,0 +1,66 @@
+
+a {
+    text-decoration: none;   /*去除下划线*/
+    color: #333;
+}
+
+body, ul, li, p{
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    list-style: none;   /* 去除无序列表前面的style*/
+
+}
+
+body{
+    font: 14px/1.5 '微软雅黑';  /*字体大小，行高，字体*/
+}
+
+#nav{
+    background-color: #ccc;     /*背景色*/
+    height: 50px;
+    line-height: 50px;      /*上下居中*/
+}
+
+#nav > ul > li { /*大于号表示nav的直接子元素,,也可以用class来解决这种问题*/
+    float: left;     /*采用浮动来解决  导航条的排列问题*/
+    width: 100px;
+    margin-left: 20px;
+    position: relative;  /*使之成为  子容器的定位点，对其自身没有影响*/
+}
+#nav > ul > li > a{
+    display: block;  /*解决行列元素无法设置宽高，把它作为块级元素展示*/
+    height: 50px;   /*无效果，因为a是行列元素，行列元素无法设置宽高*/
+    padding: 0 15px;  /*上下，左右*/
+}
+#nav > ul >li > a:hover{   /*hover 鼠标放在上面引起的变化*/
+    background-color: #cccccc;
+}
+
+#nav > ul > li:hover .child{
+    display: block;
+}
+
+#nav .child{
+    position: absolute;   /*变为绝对定位,向父容器进行查找，没有就是body  */
+    top: 50px;
+    background: #ccc;
+    line-height: 1;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    width: 100px;
+    display: none;  /*默认隐藏*/
+}
+#nav .child li{
+    margin-top: 10px;
+}
+#nav .child li:hover{
+    background: blue;
+}
+.clearfix:after{    /*解决使用float，子元素不出现，没高度的问题，使用clear */
+    content: '';
+    display: block;
+    clear: both;
+}
