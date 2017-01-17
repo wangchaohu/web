@@ -1,0 +1,40 @@
+body{
+    margin: 0px;
+}
+.ct{
+    background-color: green;
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    float: left;
+}
+
+.box{
+    display: block;
+    width: 150px;
+    height: 150px;
+    font-size: 20px;
+}
+
+.front{
+    transform: perspective 200px;
+}
+.right{
+
+}
+
+.back{
+
+}
+
+.left{
+
+}
+
+.up{
+
+}
+
+.down{
+
+}
