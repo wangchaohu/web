@@ -11,7 +11,7 @@
     <title>登录</title>
 </head>
 <body>
-<form action="login.jsp" method="post">
+<form action="Login" method="post">
     <p>
         用户名：<input type="text" name="username">
     </p>
@@ -24,6 +24,8 @@
     <%--错误信息--%>
     <%--<font color="red">${error}</font>--%>
 </form>
+
+<%--<a href="login">login</a>--%>
 
 </body>
 </html>

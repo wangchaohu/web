@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.example"/>    <!--监听该包-->
+
+
+    <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->    <!-- 使用注解将此代替-->
+
+    <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->  <!--处理器功能处理方法的调用-->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">         <!--配置视图解析，这个必须要配置，不然会出错-->
+        <!--<property name="prefix" value=""/>-->                                            <!--配置视图的路径，比如／WEB-INF／-->
+        <!--<property name="suffix" value=".jsp"/>-->                                        <!--配置视图的后缀-->
+                                                                      <!--如果这两个都配置，在controller中不需要为视图增加路径以及后缀，只需将视图名写入即可-->
+    </bean>
+
+    <!--<bean name="/index" class="com.example.controller.LoginController"/>-->   <!--已注解-->
+</beans>

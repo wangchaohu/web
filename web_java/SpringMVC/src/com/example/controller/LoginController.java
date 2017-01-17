@@ -22,15 +22,15 @@ public class LoginController {
     HttpServletRequest request;
 
 
-    @RequestMapping("index")
+    @RequestMapping("/index.html")               //这里的注解参数  是请求这个视图的后缀，比如http://localhost:8080/index.html和(login.jsp)访问同一视图
     public ModelAndView toLoginPage(){
         return new ModelAndView("/login.jsp");
     }
 
-    @RequestMapping("login")
+    @RequestMapping("/Login")         //这里注解参数  要和视图中请求的方法名对应
     public ModelAndView doLogin(){
-        String loginPageUrl = "login.jsp";
-        String successPageUrl = "success.jsp";
+        String loginPageUrl = "/login.jsp";          //若在spring-servlet中配置了ViewResolver的两个参数，则不必在这里加入后缀.jsp
+        String successPageUrl = "/success.jsp";
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -38,4 +38,5 @@ public class LoginController {
         return service.doLogin(loginPageUrl, successPageUrl, username, password);
 
     }
+
 }
