@@ -1,0 +1,90 @@
+*{   /*清除格式*/
+    margin: 0;
+    padding: 0;
+}
+.wrap{
+    width: 640px;
+    height: 580px;
+    background: #000;
+    margin: 50px auto; /*居中*/
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.controls{
+    position: absolute;
+    bottom: 15px;
+    left: 60px;
+}
+.play_stop{
+    width: 56px;
+    height: 56px;
+    float: left;
+    background: url("/img/play.png");
+    margin:0 30px;
+    cursor: pointer;  /*鼠标放上是小手的形状*/
+}
+.time_minus{
+    width: 23px;
+    height: 23px;
+    float: left;
+    background: url("/img/time_minus.png");
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.time_plus{
+    background-position: 0 -23px;
+    width: 23px;
+    height: 23px;
+    float: left;
+    background: url("/img/time_plus.png");
+    margin-top: 15px;
+    cursor: pointer;
+}
+/*html5 选择器*/
+input[type="range"]{
+    background:#c6ff00;
+    outline: none;
+    -webket-appearance:none;  /*取消range标签默认样式，仅在-webkit引擎浏览器中*/
+}
+input[type="range"]::-webkit-slider-thumb{   /*range上的滑条*/
+    background: #c6ff00;
+    -webket-appearance:none;  /*取消range标签默认样式，仅在-webkit引擎浏览器中*/
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;   /*css3圆角属性*/
+
+}
+.paly_time{
+    width: 85%;
+    height: 5px;
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    outline: none;
+    transform: translate(-50%);
+    cursor: pointer;
+}
+.volume_wrap{
+    position: absolute;
+    bottom: 36px;
+    right: 60px;
+    cursor: pointer;
+}
+.volume{
+    width: 135px;
+    height: 5px;
+    /*position: absolute;*/
+    cursor: pointer;
+}
+.volume_btn{
+    width: 24px;
+    height: 20px;
+    background: url("/img/volume.png");
+    float: left;
+    margin-right: 15px;
+    outline: none;
+    cursor: pointer;
+}

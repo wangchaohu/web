@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>video视频播放</title>
+<link rel="stylesheet" type="text/css" href="css/video.css">
+
+
+</head>
+<body>
+<div class="wrap">
+    <video width="640" height="480" poster="img/img.png">    <!--poster在视频播放前展示，点击播放按钮后消失-->
+        <source src="videos/video.mp4">     <!--有多个格式的视频时，可以在这里面写入，使浏览器自动适配兼容-->
+    </video>
+    <input type="range"class="paly_time" value="0">
+    <div class="controls">
+        <span class="time_minus"></span>  <!--快退-->
+        <span class="play_stop"></span>   <!--播放,暂停-->
+        <span class="time_plus"></span>  <!--快进-->
+    </div>
+
+    <div class="volume_wrap">
+        <span class="volume_btn"></span>
+        <input type="range" value="20" min="0" max="100" class="volume">
+    </div>
+</div>
+</body>
+</html>
+
+<script src="js/jquery-3.1.1.min.js"></script>
+<script>
+    var $video = $('video')[0];  /*[0]转dom*/
+    var $play_stop = $('.play_stop');
+
+    function play() {
+        if ($video.paused){  //true代表暂停   false  代表播放
+            $video.play();
+            $play_stop.css('background-position','0 -56px');  //切换按钮背景图
+        }else {
+            $video.pause();
+            $play_stop.css('background-position','0 0px')
+        }
+    }
+    $play_stop.click(function () {
+        play();
+    });
+
+    $('.time_minus').click(function () {
+        $video.currentTime -= 3;
+    });
+
+    $('.time_plus').click(function () {
+        $video.currentTime += 3;
+    });
+
+    $('.volume_btn').click(function () {
+        if ($video.muted){
+            $video.muted = false;
+            $(this).css("background-position", '0 0');
+        }else {
+            $video.muted = true;
+            $(this).css("background-position", '0 -20');
+        }
+    });
+
+    $('.volume').change(function (event) {
+        $('video').volume =  $(this).val()/100;
+    });
+
+    var $play_time = $('.paly_time');
+    $play_time.attr('max', $video.duration);  //得到视频时长
+    $play_time.change(function () {
+        $video.play();
+        $play_time.attr('max', $video.duration);
+        $video.currentTime = $(this).val();  //把拖动的进度条得到的值赋值给视频播放的进度
+    });
+
+    /*获取键盘事件*/
+    $(window).keydown(function (event) {
+        if (event.keyCode == 32){ //得到键盘键码
+            play();
+        }
+    });
+</script>
