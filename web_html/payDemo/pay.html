@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>支付宝特效</title>
+</head>
+
+<style type="text/css">
+	/*使用css3中的伸缩布局完成居中 */
+
+	html,body{
+		height: 100%;
+	}
+
+	body{
+		margin: 0;
+		padding: 0;
+
+		/*居中效果*/
+		display: flex;   /*声明是一个伸缩盒子*/
+		/*调增主轴以及测轴的对齐方式 */
+		justify-content: center;
+		align-items: center;
+		background: #1e577e;
+		overflow: hidden;
+	}
+
+	.main{
+		width: 128px;
+		height: 128px;
+		position: relative;
+	}
+
+	.main > div{
+		width: 128px;
+		height: 128px;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.circle{
+		border: 1px solid #ccc;
+		border-radius: 50%;
+		opacity: 0;
+	}
+	.center{
+		cursor: pointer;   /*出现小手*/
+	}
+
+	.circle.go{
+
+		animation-name: change;
+		animation-duration: 3s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+	}
+	@keyframes change {
+		0%{
+			transform: scale(1);
+			opacity: 0.4;
+		}
+		100%{
+			transform: scale(4);
+			opacity: 0;
+		}
+	}
+
+	.cl{
+		float: right;
+		width: 50px;
+		margin-right: 30px;
+		border-width: 1px;
+		justify-content: right;
+		align-items: right;
+		background: #ffffff;
+	}
+</style>
+
+<!-- js
+先把事件找到
+根据事件找方法
+根据方法写业务逻辑
+根据api去实现业务逻辑 
+
+定义动画，使用动画
+-->
+
+<body>
+
+	<div class="main">
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="center">
+			<img src="./images/pay.png">
+		</div>
+	</div>
+
+	<div class="cl">
+		<select id="changeId">
+			<option value="">换肤</option>
+			<option value="pink">粉色</option>
+			<option value="yellow">黄色</option>
+			<option value="green">绿色</option>
+			<option value="blue">蓝色</option>
+		</select>
+	</div>
+
+	<script>
+
+		document.querySelector('#changeId').onchange=function(){
+			var color = this.value;
+			document.body.style.background = color;   /*得到body的background属性，并将color赋值*/
+
+			/*吧这个数据保存在localstorage中,,以键值对的方式去保存*/
+			window.localStorage.setItem("color", color);
+		};
+
+		var color = window.localStorage.getItem("color");
+		if (color) {
+			document.body.style.background = color;
+		}
+
+		document.querySelector('.center').onclick=function () {
+     	// body...
+     	var circles = document.querySelectorAll('.circle');
+     	//js里面操作必须一个一个遍历出来，然后单独操作
+     	// jquery中，可以批量操作 
+     	for (var i = 0; i < circles.length; i++) {
+
+     		// 加入动画效果
+     		//给所有的circle添加类名
+     		// html5新增的api
+
+     		// 分别设置每一个动画的延迟时间
+     		// 每个circle的延迟时间不一样
+     		circles[i].style.animationDelay = i * 0.6 + "s";
+     		//时间间隔的问题
+     		//五个circle同一时间执行动画
+     		circles[i].classList.add("go");
+     	};
+
+     	
+     }
+ </script>
+</body>
+</html>

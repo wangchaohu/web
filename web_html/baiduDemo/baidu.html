@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>百度地图的调用</title>
+
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5QQBzLs6aABD2sYU6UfsuvgGgAtB160C"></script>
+	<style type="text/css">
+		body, html{
+			width: 500px;
+			height: 500px;}
+			#panorama {height: 50%;overflow: hidden;}
+		</style>
+	</head>
+
+
+	<body>
+
+
+		<div id="panorama"></div>
+
+		<script>
+
+
+//获取所在位置经纬度，将经纬度传给百度地图
+function showLocation(position) {
+	//在这里调用百度地图接口
+
+alert("a");
+	// var jd = position.coords.latitude;
+	// var wd = position.coords.longitude;
+	var jd = "116.402544";
+	var wd = "39.91582";
+	//全景图展示
+	var panorama = new BMap.Panorama('panorama');
+	panorama.setPosition(new BMap.Point(jd,wd)); //根据经纬度坐标展示全景图
+}
+
+//获取位置经纬度
+//这里使用回调函数
+    navigator.geolocation.getCurrentPosition(showLocation);
+</script>
+</body>
+</html>
