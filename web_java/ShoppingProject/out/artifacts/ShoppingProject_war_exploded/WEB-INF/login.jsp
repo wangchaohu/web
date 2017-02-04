@@ -12,15 +12,15 @@
 </head>
 <body>
 <h1>用户登录</h1>
-<form action="??" method="post">
+<form action="login" method="get">
     <table border="1">
         <tr>
-            <td>用户名：</td>
-            <td><input type="text"></td>
+            <td>用户号：</td>
+            <td><input type="text" name="id"></td>
         </tr>
         <tr>
             <td>密 码：</td>
-            <td><input type="password"></td>
+            <td><input type="password" name="pwd"></td>
         </tr>
         <tr>
             <td><input type="submit" value="登录"></td>
