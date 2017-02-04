@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>无缝滚动</title>
+</head>
+<meta charset="utf-8">
+<style type="text/css">
+	#box{
+		width: 399px;
+		border:5px solid #ababab;
+	}
+
+	#title{
+		height: 62px;
+		overflow: hidden;
+		font-size: 26px;
+		line-height: 62px;
+		padding-left: 30px;
+		background: #000000;
+		border-radius: 8px 8px 0 0;
+		color: #fff;
+		position: relative;
+	}
+
+	#box2{
+		height: 100px;
+		width: 335px;
+		margin-left: 25px;
+		margin-top: 10px;
+		overflow: hidden;
+	}
+
+	#ol1, #ol2{
+		margin: 0;
+		padding: 0;
+	}
+
+</style>
+<body>
+
+
+
+	<div id="box">
+		<h1 id="title">无缝向上滚动</h1>
+		<div id="box2">
+			<ol id="ol1">
+				<li>第一行</li>
+				<li>第2行</li>
+				<li>第3行</li>
+				<li>第4行</li>
+				<li>第5行</li>
+				<li>第6行</li>
+				<li>第7行</li>
+				<li>第8行</li>
+				<li>第9行</li>
+			</ol>
+			<ol id="ol2"></ol>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var area = document.getElementById('box2');
+		var ol1 = document.getElementById('ol1');
+		var ol2 = document.getElementById('ol2');
+		area.scrollTop = 0;
+	//克隆
+	ol2.innerHTML = ol1.innerHTML;
+
+	var myScroll = setInterval('scroll()', 50);
+
+
+	function scroll() {
+		if (area.scrollTop >= ol1.offsetHeight) {
+			area.scrollTop = 0;
+		}else{
+			area.scrollTop++;
+		}
+	}
+
+	area.onmouseover = function(){
+		clearInterval(myScroll);
+	}
+	area.onmouseout = function(){
+		myScroll =setInterval('scroll()', 50);
+	}
+
+</script>
+
+</body>
+</html>

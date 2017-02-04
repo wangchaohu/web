@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<head>
+	<title>倒计时效果</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<script type="text/javascript">
+		window.onload = function () {
+			showTime();
+			showNext();
+			buy();
+		// alert(date);
+	}
+
+	// 现在的时间
+
+	function showTime(){
+		var DATE = new Date();
+		var year = DATE.getFullYear();
+		var month = DATE.getMonth() + 1;
+		var date = DATE.getDate();  //日
+		var day = DATE.getDay();   //星期
+		var h = DATE.getHours();
+		var m = DATE.getMinutes();
+		var s = DATE.getSeconds();
+
+		month = checkTime(month);
+		date = checkTime(date);
+		h = checkTime(h);
+		m = checkTime(m);
+		s = checkTime(s);
+
+		document.getElementById('showtime').innerHTML = year + "年" + month + "月" + date + "日" +"&nbsp;&nbsp;&nbsp;"+ transformWeek(day)+"&nbsp;&nbsp;&nbsp;" + h + ":" + m + ":" + s;
+		setTimeout(showTime,500);
+	}
+
+	function transformWeek(i){
+		var week = new Array(7);
+		week[0] = "星期日";
+		week[1] = "星期一";
+		week[2] = "星期二";
+		week[3] = "星期三";
+		week[4] = "星期四";
+		week[5] = "星期五";
+		week[6] = "星期六";
+
+		return week[i];
+	}
+
+	function checkTime(i){
+		if (i < 10) {
+			i = "0" + i;
+		}
+		return i;
+	}
+
+	//距离下个月的时间
+	function showNext(){
+		var curDate = new Date();
+		var curYear = curDate.getFullYear();
+		var curMonth = curDate.getMonth() + 1 + 1;
+
+		var now = new Date(curYear + "," + curMonth + ",1");
+		var curTime = new Date();
+		var time = now.getTime() - curTime.getTime();   //得到的是毫秒
+
+		//1天 = 24小时   1小时 = 60分钟  1分钟 = 60秒  1s = 1000ms
+		var t = Math.ceil(time / (24 * 60 * 60 * 1000));
+		document.getElementById('show2').innerHTML = t;
+	}
+
+	//距离抢购结束
+
+	function buy(){
+		var endTime = new Date("2017/2/6,17:00:00");
+		var startTime = new Date();
+
+		var leftTime = parseInt((endTime.getTime() - startTime.getTime())/1000);  //得到秒
+
+		var day = parseInt(leftTime/(60*60*24));
+
+		var hh = parseInt(leftTime / (60 * 60) % 24);
+		var mm = parseInt(leftTime / 60 % 60);
+		var ss = parseInt(leftTime % 60);
+		
+		document.getElementById('show').innerHTML = "距离抢购结束" + day + "天" + hh + "小时" + mm + "分钟" + ss+"秒";
+		setTimeout(buy, 500);
+	}
+</script>
+
+<div id="showtime" align="center"> <font size="4">显示当前时间</font></div>
+
+<div align="center"><font size="18">距离下个月还有<div id="show2"><font size="18">0</font></div>天</font></div>
+
+<div id="show" align="center"></div>
+
+</body>
+</html>
