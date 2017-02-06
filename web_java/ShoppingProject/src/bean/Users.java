@@ -68,4 +68,9 @@ public class Users {
     public void setGrade(int grade) {
         this.grade = grade;
     }
+
+    @Override
+    public String toString() {
+        return "User[id=" + id + "-name=" + name + "-pwd=" + pwd + "-email=" + email + "-grade=" + grade + "]";
+    }
 }

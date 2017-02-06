@@ -24,6 +24,7 @@ public class GoHallServlet extends javax.servlet.http.HttpServlet {
         UserService userService = new UserService();
 
         if (userService.checkUser(loginUser)){
+            System.out.print(loginUser.toString());
             //合法用户,跳转到购物大厅
             request.getRequestDispatcher("/WEB-INF/shoppinghall.jsp").forward(request, response);
         }else {
