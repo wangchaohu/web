@@ -5,6 +5,10 @@
 </head>
 <meta charset="utf-8">
 <style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
 	#box{
 		width: 399px;
 		border:5px solid #ababab;
@@ -58,30 +62,30 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var area = document.getElementById('box2');
-		var ol1 = document.getElementById('ol1');
+		var area = document.getElementById('box2');   //获取滚动的区域
+		var ol1 = document.getElementById('ol1');   
 		var ol2 = document.getElementById('ol2');
 		area.scrollTop = 0;
-	//克隆
-	ol2.innerHTML = ol1.innerHTML;
+	     //克隆
+		ol2.innerHTML = ol1.innerHTML;                 //将ol1的内容克隆赋值给ol2，使得ol2与ol1的内容数据都一样
 
-	var myScroll = setInterval('scroll()', 50);
+		var myScroll = setInterval('scroll()', 50);    //50毫秒执行一次scroll()
 
 
-	function scroll() {
-		if (area.scrollTop >= ol1.offsetHeight) {
-			area.scrollTop = 0;
-		}else{
-			area.scrollTop++;
+		function scroll() {
+			if (area.scrollTop >= ol1.offsetHeight) {      //当滚动的区域大于ol1的高度时
+				area.scrollTop = 0;                        //将滚动区域初始化为0，回到图1的位置
+			}else{
+				area.scrollTop++;
+			}
 		}
-	}
 
-	area.onmouseover = function(){
-		clearInterval(myScroll);
-	}
-	area.onmouseout = function(){
-		myScroll =setInterval('scroll()', 50);
-	}
+		area.onmouseover = function(){                     //鼠标放上之后停止滚动
+			clearInterval(myScroll);
+		}
+		area.onmouseout = function(){                      //鼠标滑出，继续滚动
+			myScroll =setInterval('scroll()', 50);
+		}
 
 </script>
 
