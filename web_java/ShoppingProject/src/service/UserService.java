@@ -19,14 +19,17 @@ public class UserService {
     public boolean checkUser(Users user){
         int id = user.getId();
         String pwd = user.getPwd();
-        List<String> list = LiteSql.getInstance().querySqlRL();
-       if (null != list && list.size() > 0){
+        List<String[]> list = LiteSql.getInstance().querySqlRL("select * from users where id = 100");
+       if (null != list && !list.isEmpty()){
 
-           System.out.println(list.size());
-//        if ("100".equals(id + "") && "123456".equals(pwd)){
-            user.setName(list.get(1));
-            user.setEmail(list.get(3));
-            user.setGrade(Integer.parseInt(list.get(5)));
+           System.out.print(list.size());
+           for (int i = 0; i < list.size(); i++) {
+               String[] strings = list.get(i);
+               //对user二次封装
+               user.setName(strings[1]);
+               user.setEmail(strings[3]);
+               user.setGrade(Integer.parseInt(strings[5]));
+           }
             return true;
         }else {
             return false;

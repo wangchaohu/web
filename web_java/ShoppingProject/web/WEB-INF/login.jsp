@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>用户登录</h1>
-<form action="login" method="get">
+<form action="login" method="post">
     <table border="1">
         <tr>
             <td>用户号：</td>

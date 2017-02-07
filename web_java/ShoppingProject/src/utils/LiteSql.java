@@ -2,7 +2,6 @@ package utils;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by wangchaohu on 2017/2/6.
@@ -50,21 +49,25 @@ public class LiteSql {
      * @return resultLists
      * */
 
-    public List<String> querySqlRL(){
-        List<String> resultLists = null;
-        String querySql = "select * from users where id = 100";
+    public ArrayList querySqlRL(String querySql){
+
+
+        ArrayList<String[]> resultLists = null;
 
         Connection conn = getConn();
 
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(querySql);
-            resultLists = new ArrayList<String>();
-            if (rs.next()){
+            resultLists = new ArrayList();
+            while (rs.next()){
                 ResultSetMetaData data = rs.getMetaData();
+
+                String[] objectses = new String[data.getColumnCount()];
                 for (int i = 1; i <= data.getColumnCount(); i++) {
-                    resultLists.add(rs.getString(i));
+                    objectses[i-1] = rs.getString(data.getColumnName(i));
                 }
+                resultLists.add(objectses);
             }
         }catch (SQLException e){
             e.printStackTrace();

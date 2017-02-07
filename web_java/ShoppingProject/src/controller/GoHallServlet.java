@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Users;
+import service.BookService;
 import service.UserService;
 
 import java.io.IOException;
@@ -24,7 +25,8 @@ public class GoHallServlet extends javax.servlet.http.HttpServlet {
         UserService userService = new UserService();
 
         if (userService.checkUser(loginUser)){
-            System.out.print(loginUser.toString());
+
+            request.setAttribute("books",new BookService().getAllBook());
             //合法用户,跳转到购物大厅
             request.getRequestDispatcher("/WEB-INF/shoppinghall.jsp").forward(request, response);
         }else {
