@@ -2,6 +2,7 @@ package controller;
 
 import bean.Users;
 import service.BookService;
+import service.MyCar;
 import service.UserService;
 
 import java.io.IOException;
@@ -25,6 +26,10 @@ public class GoHallServlet extends javax.servlet.http.HttpServlet {
         UserService userService = new UserService();
 
         if (userService.checkUser(loginUser)){
+
+            //购物车，在用户登录的时候就生成一个购物车，将购物车放入session中
+            MyCar myCar = new MyCar();
+            request.getSession().setAttribute("myCar", myCar);
 
             request.setAttribute("books",new BookService().getAllBook());
             //合法用户,跳转到购物大厅

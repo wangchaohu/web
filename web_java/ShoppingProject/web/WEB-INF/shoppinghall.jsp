@@ -20,13 +20,28 @@
         ArrayList<Books> bookses = (ArrayList<Books>) request.getAttribute("books");
         for (int i = 0; i < bookses.size(); i++){
     %>
-    <tr><td><%= bookses.get(i).getName()%></td><td><%= bookses.get(i).getPrice()%></td><td><%= bookses.get(i).getPublishHouse()%></td><td><%= bookses.get(i).getAuthor()%></td><td><a href="#">购买</a> </td></tr>
+    <tr>
+        <td><%= bookses.get(i).getName()%></td>
+        <td><%= bookses.get(i).getPrice()%></td>
+        <td><%= bookses.get(i).getPublishHouse()%></td>
+        <td><%= bookses.get(i).getAuthor()%></td>
+        <td>
+            <%--使用这种方式传参总是不行，原因暂不知道--%>
+            <%--<a href="http://localhost:8080/ShoppingProject/controller/ShoppingDlServlet?id="<%=bookses.get(i).getId()%>>购买</a>--%>
+
+            <%--现在使用将id保存在request中的形式进行传参--%>
+                <%
+                    request.setAttribute("id", bookses.get(i).getId());
+                %>
+                <a href="/shoppingDl">购买</a>
+        </td>
+    </tr>
     <%
         }
     %>
 
     <tr><td colspan="4"><input type="button" value="查看购物车"></td></tr>
 </table>
-
+<a href="../ShoppingProject/web/index.jsp">返回重新登录</a>
 </body>
 </html>
