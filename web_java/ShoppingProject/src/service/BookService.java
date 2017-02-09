@@ -17,11 +17,14 @@ public class BookService {
 
     /**提供一个方法，根据书的id号，返回书的全部信息*/
     public Books getBook(String id){
-        Books books = new Books();
-        //根据id返回的书，有且只有一本
-        ArrayList<String[]> bookList = LiteSql.getInstance().querySqlRL("select * from books where id = " + id);
 
+        String sql = "select *from books where id = " + id;
+
+        //根据id返回的书，有且只有一本
+        ArrayList<String[]> bookList = LiteSql.getInstance().querySqlRL(sql);
+        Books books = new Books();
         if (bookList.size() == 1){
+            book = bookList.get(0);
             books.setId(Integer.parseInt(book[0]));
             books.setName(book[1]);
             books.setAuthor(book[2]);

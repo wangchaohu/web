@@ -26,14 +26,7 @@
         <td><%= bookses.get(i).getPublishHouse()%></td>
         <td><%= bookses.get(i).getAuthor()%></td>
         <td>
-            <%--使用这种方式传参总是不行，原因暂不知道--%>
-            <%--<a href="http://localhost:8080/ShoppingProject/controller/ShoppingDlServlet?id="<%=bookses.get(i).getId()%>>购买</a>--%>
-
-            <%--现在使用将id保存在request中的形式进行传参--%>
-                <%
-                    request.setAttribute("id", bookses.get(i).getId());
-                %>
-                <a href="/shoppingDl">购买</a>
+              <a href="/shoppingDl?id=<%=bookses.get(i).getId()%>">购买</a>
         </td>
     </tr>
     <%
