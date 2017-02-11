@@ -14,25 +14,42 @@ import java.io.IOException;
 public class ShoppingDlServlet extends javax.servlet.http.HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = (String) req.getParameter("id");
 
-        System.out.println(id+"-----------");
         MyCar myCar = (MyCar) req.getSession().getAttribute("myCar");
-        myCar.addBook(id, new BookService().getBook(id));
+        if (req.getParameter("type").equals("delBook")) {
 
-        //将购物车中所有书的集合放入request中，传入到下个界面
-        req.setAttribute("bookList", myCar.getAllBooks());
+            String delectId = req.getParameter("delectId") + "";
+            myCar.delectBook(delectId, new BookService().getBook(delectId));
 
-        //将购物车中所有书的总金额，放入request中
-        req.setAttribute("totalPrice", myCar.totalPrice());
+            //将购物车中所有书的集合放入request中，传入到下个界面
+            req.setAttribute("bookList", myCar.getAllBooks());
+            //将购物车中所有书的总金额，放入request中
+            req.setAttribute("totalPrice", myCar.totalPrice());
 
-        req.getRequestDispatcher("/WEB-INF/myShopCar.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/myShopCar.jsp").forward(req, resp);
+        }
+
+        if (req.getParameter("type").equals("addBook")) {
+            String id = req.getParameter("id");
+            myCar.addBook(id, new BookService().getBook(id));
+            //将购物车中所有书的集合放入request中，传入到下个界面
+            req.setAttribute("bookList", myCar.getAllBooks());
+            //将购物车中所有书的总金额，放入request中
+            req.setAttribute("totalPrice", myCar.totalPrice());
+            req.getRequestDispatcher("/WEB-INF/myShopCar.jsp").forward(req, resp);
+        }
+
+        if (req.getParameter("type").equals("returnHall")){
+            req.setAttribute("books", new BookService().getAllBook());
+            req.getRequestDispatcher("WEB-INF/shoppinghall.jsp").forward(req, resp);
+        }
+
+
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        doGet(req,resp);
-
+        doGet(req, resp);
     }
 }

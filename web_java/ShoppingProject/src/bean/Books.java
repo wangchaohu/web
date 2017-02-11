@@ -11,7 +11,7 @@ public class Books {
     private String publishHouse;
     private float price;
     private int nums;
-    private int shoppingNums = 1;   //购买书的数量,默认为1本
+    private int shoppingNums = 0;   //购买书的数量,默认为1本
 
     public int getShoppingNums() {
         return shoppingNums;
