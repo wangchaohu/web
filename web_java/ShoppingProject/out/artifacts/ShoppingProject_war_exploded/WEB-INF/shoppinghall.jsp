@@ -18,7 +18,7 @@
     <tr><td>书名</td><td>价格</td><td>出版社</td><td>作者</td><td>点击购买</td></tr>
     <%
         ArrayList<Books> bookses = (ArrayList<Books>) request.getAttribute("books");
-        System.out.println(bookses.size());
+//        System.out.println("数据库中书的总量：：：" + bookses.size());
         for (int i = 0; i < bookses.size(); i++){
     %>
     <tr>

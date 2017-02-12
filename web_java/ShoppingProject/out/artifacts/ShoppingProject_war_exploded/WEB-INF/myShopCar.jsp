@@ -18,7 +18,7 @@
 <br>
 <a href="/shoppingDl?type=returnHall">返回购物大厅</a>
 <br><br>
-<form action="#" method="post">
+<form action="/shoppingDl?type=update" method="post">
     <table border="1" style="border-collapse: collapse">
         <tr><td>书编号</td><td>书名</td><td>价格</td><td>出版社</td><td>购买数量</td><td>删除 </td></tr>
         <%
@@ -26,12 +26,9 @@
             int totalPrice = 0;
             for (int i = 0; i < booksList.size(); i++){
                 Books book = booksList.get(i);
-                if (book.getId() == 0){
-                    continue;
-                }
         %>
         <tr>
-            <td><%=book.getId()%></td>
+            <td><%=book.getId()%><input type="hidden" name="id" value="<%=book.getId()%>"></td>
             <td><%=book.getName()%></td>
             <td><%=book.getPrice()%></td>
             <td><%=book.getPublishHouse()%></td>
@@ -41,9 +38,12 @@
         <%
             }
         %>
-        <tr><td colspan="6"><input type="submit" value="确认购买"></td> </tr>
+        <tr>
+            <td colspan="6"><input type="submit" value="更新"></td> </tr>
         <tr><td colspan="6">所有书的总价格：${totalPrice}元</td></tr>
     </table>
 </form>
+
+<a href="/order">提交订单</a>
 </body>
 </html>

@@ -21,4 +21,13 @@
         <servlet-name>shoppingDlServlet</servlet-name>
         <url-pattern>/shoppingDl</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GoOrderServlet</servlet-name>
+        <servlet-class>controller.GoOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GoOrderServlet</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
 </web-app>

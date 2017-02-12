@@ -22,13 +22,13 @@ public class GoHallServlet extends javax.servlet.http.HttpServlet {
 
 
         Users loginUser = new Users(Integer.parseInt(id), pwd);
-
         UserService userService = new UserService();
 
         if (userService.checkUser(loginUser)){
 
             //购物车，在用户登录的时候就生成一个购物车，将购物车放入session中
             MyCar myCar = new MyCar();
+            request.getSession().setAttribute("user", loginUser);
             request.getSession().setAttribute("myCar", myCar);
 
             request.setAttribute("books",new BookService().getAllBook());

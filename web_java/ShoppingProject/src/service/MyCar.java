@@ -13,26 +13,30 @@ public class MyCar {
     float totalPrice = 0.0f;
 
     //添加
-    public void addBook(String id, Books book) {
-        if (books.containsKey(id)) {
-            int shoppingNums = book.getShoppingNums();
-            shoppingNums += 1;
-            System.out.println(shoppingNums);
-            book.setShoppingNums(shoppingNums);
-        }
-        books.put(id, book);
+    public void addBook(String id) {
 
+        if (books.containsKey(id)) {
+            Books book = books.get(id);
+            int nums = book.getShoppingNums();
+            System.out.println("购买的书的数量" + (nums++));
+
+            book.setShoppingNums(nums++);
+        } else {
+            books.put(id, new BookService().getBook(id));
+        }
     }
 
     //删除
-    public void delectBook(String id, Books book) {
+    public void delectBook(String id) {
+        Books book = books.get(id);
         totalPrice -= book.getPrice() * book.getShoppingNums();
         books.remove(id);
     }
 
     //更新
-    public void updateBook() {
-
+    public void updateBook(String id, String nums) {
+        Books book = books.get(id);
+        book.setShoppingNums(Integer.parseInt(nums));
     }
 
     //得到购物车中所有的书
@@ -55,7 +59,6 @@ public class MyCar {
 
     //购物车总价格
     public float totalPrice() {
-
         totalPrice = 0.0f;
         ArrayList<Books> al = getAllBooks();
         for (int i = 0; i < al.size(); i++) {
