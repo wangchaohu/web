@@ -11,13 +11,14 @@ public class LiteSql {
     private String dbUrl="jdbc:mysql://127.0.0.1:3306/bookShop";
     private String dbUser = "root";
     private String dbPwd = "zx1115hx";
-
+    private Connection sqlConn = null;
 
     /**
      * 单例模式
      * */
 
     private static class LiteSqlHolder{
+
         private static final LiteSql liteSql = new LiteSql();
     }
 
@@ -26,8 +27,8 @@ public class LiteSql {
     }
 
 
-    private Connection getConn(){
-        Connection sqlConn = null;
+    public Connection getConn(){
+
 
         try {
             Class.forName(dbDriver);
@@ -71,6 +72,8 @@ public class LiteSql {
             }
         }catch (SQLException e){
             e.printStackTrace();
+        }finally {
+            close();
         }
 
         return resultLists;
@@ -99,4 +102,11 @@ public class LiteSql {
         return false;
     }
 
+    public void close(){
+        try {
+        sqlConn.close();}
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

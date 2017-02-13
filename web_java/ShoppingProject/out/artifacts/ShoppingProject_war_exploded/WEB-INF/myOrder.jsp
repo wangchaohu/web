@@ -1,5 +1,4 @@
 <%@ page import="bean.Users" %>
-<%@ page import="service.MyCar" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="bean.Books" %><%--
   Created by IntelliJ IDEA.
@@ -15,11 +14,9 @@
 </head>
 <body>
 <h1>我的订单</h1>
-<h2>我的个人信息</h2>
 <%
     Users user = (Users) session.getAttribute("user");
     ArrayList<Books> al = (ArrayList<Books>) request.getAttribute("shoppingBooks");
-//    String totalPrice = (float) request.getAttribute("shoppingBooksPrice") + "";
 %>
 <table border="1" style="border-collapse: collapse ">
     <tr>
