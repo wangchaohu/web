@@ -11,6 +11,12 @@
 <html>
 <head>
     <title>我的订单</title>
+    <script type="text/javascript">
+
+        function goSumbitOrder(){
+            window.location.href="/submitOrder";
+        }
+    </script>
 </head>
 <body>
 <h1>我的订单</h1>
@@ -71,7 +77,9 @@
     <tr>
         <td colspan="5" align="center">总价为：${shoppingBooksPrice}元</td>
     </tr>
-
 </table>
+<br>
+<a href="/order">返回购物车</a>
+<input type="button" onclick="goSumbitOrder()" value="确认订单">
 </body>
 </html>

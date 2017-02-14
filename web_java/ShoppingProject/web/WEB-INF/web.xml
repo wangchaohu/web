@@ -39,4 +39,13 @@
         <servlet-name>submitOrder</servlet-name>
         <url-pattern>/submitOrder</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>goShowMyCar</servlet-name>
+        <servlet-class>controller.GoShowMyCar</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>goShowMyCar</servlet-name>
+        <url-pattern>/goShowMyCar</url-pattern>
+    </servlet-mapping>
 </web-app>

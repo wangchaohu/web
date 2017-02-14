@@ -20,7 +20,6 @@ public class ShoppingDlServlet extends javax.servlet.http.HttpServlet {
 
             String delectId = req.getParameter("delectId") + "";
 
-            System.out.print("删除的书的id===" + delectId);
             myCar.delectBook(delectId);
 
             //将购物车中所有书的集合放入request中，传入到下个界面
@@ -33,12 +32,11 @@ public class ShoppingDlServlet extends javax.servlet.http.HttpServlet {
 
         if (req.getParameter("type").equals("addBook")) {
             String id = req.getParameter("id");
+
             myCar.addBook(id);
-            //将购物车中所有书的集合放入request中，传入到下个界面
-            req.setAttribute("bookList", myCar.getAllBooks());
-            //将购物车中所有书的总金额，放入request中
-            req.setAttribute("totalPrice", myCar.totalPrice());
-            req.getRequestDispatcher("/WEB-INF/myShopCar.jsp").forward(req, resp);
+            //为了防止某个页面刷新，重复提交，，在中间添加一个servlet，
+//让数据经过中间servlet来进行转向，中间servlet只把要显示的数据放入其中
+            resp.sendRedirect("/goShowMyCar");
         }
 
         if (req.getParameter("type").equals("returnHall")) {

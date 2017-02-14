@@ -5,7 +5,8 @@ import bean.Users;
 import utils.LiteSql;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.sql.Date;
+import java.util.*;
 
 
 /**
@@ -20,7 +21,7 @@ public class OrderService {
     public void submitOrder(MyCar myCar, Users users){
 
         //插入到order表
-        String sql = "INSERT INTO order (userId, totalPrice, orderDate) VALUES (?, ?, ?)";
+        String sql = " INSERT INTO orders (userId, totalPrice,orderDate) VALUES (?,?,?)";
 
         try {
             conn = LiteSql.getInstance().getConn();
@@ -33,10 +34,11 @@ public class OrderService {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, users.getId());
             ps.setFloat(2, myCar.totalPrice());
-            ps.setDate(3, new Date(new java.util.Date().getTime()));
-            ps.executeQuery();
+            java.util.Date date = new java.util.Date();
+            ps.setDate(3, new Date(date.getTime()));
+            ps.execute();
 
-            sql = "SELECT orderId FROM order";
+            sql = "SELECT orderId FROM orders";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             int orderId = 0;
@@ -50,14 +52,11 @@ public class OrderService {
                 ps.setInt(1, orderId);
                 ps.setInt(2, book.getId());
                 ps.setInt(3, book.getShoppingNums());
-                ps.executeQuery();
+                ps.execute();
             }
-
             conn.commit();
-
-
         }catch (Exception e){
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }finally {
             try {
                 conn.close();
