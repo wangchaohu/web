@@ -16,24 +16,29 @@ import {
 export default class Components extends Component {
     constructor(props) {
         super(props);
-        this.state = {disable: false};
+        this.state = {disabled: false};
     }
 
     //把自定义方法作为属性定义
     customButtonHandler = () => {
         const {click} = this.props;
-        click();
+        console.log(1);
+        this.disopen();
+        click(this.enopen);
     };
 
-    enabled = () =>{
+    enopen = () =>{
+        // alert('正在获取数据.....');
       this.setState({
-          disable : true,
+          disabled : false,
       });
+        console.log(4);
+      alert("你可以点击按钮了");
     };
 
-    disabled = () =>{
+    disopen = () =>{
       this.setState({
-          disable:false,
+          disabled:true,
       });
     };
 
@@ -43,7 +48,8 @@ export default class Components extends Component {
         return (
             <View style={{flex:1 }}>
                 <TouchableOpacity
-                    style={[styles.button, this.state.disable && styles.buttonT,{backgroundColor:bg},]}
+                    disabled={this.state.disabled}
+                    style={[styles.button, this.state.disabled && styles.buttonT,{backgroundColor:bg}]}
                     onPress={this.customButtonHandler}
                 >
                     <Text style={styles.buttonText}>{this.props.text}</Text>
@@ -72,6 +78,6 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     buttonT:{
-      color:'gray',
+      backgroundColor:'gray',
     },
 });

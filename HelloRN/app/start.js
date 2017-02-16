@@ -13,6 +13,6 @@ import {AppRegistry} from "react-native";
 // import Start from './state/State';
 // import Start from './component/Components';
 // import Start from './scene/SimpleNavigationApp';
-import Start from './btn/Buttons';
-
+// import Start from './btn/Buttons';
+import Start from './fetch/FetchDemo';
 AppRegistry.registerComponent('HelloRN', () => Start);

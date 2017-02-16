@@ -18,19 +18,24 @@ import {
 import Btn from '../component/Components';
 
 export default class Buttons extends Component {
-
-    fetchData = () => {
-      this.refs.button.enabled();
-      this.Timer = setTimeout(() => {
-          this.refs.button.disabled();
+    fetchData = (enabledCallBack) => {
+        console.log(3);
+      this.timer = setTimeout(() => {
+          enabledCallBack();
       }, 3000);
+
     };
+
+    componentWillUnmount(){
+
+        this.timer && clearTimeout(this.timer);
+    }
 
     render() {
         return (
             <View style={styles.container}>
                 <Text>下面是按钮的示例</Text>
-                <Btn text="确定" ref="button" bg="red" click={() => alert('你点击了确定按钮')}/>
+                <Btn text="确定" bg="red" click={() => alert('你点击了确定按钮')}/>
                 <Btn text="取消" bg="green" click={this.fetchData }/>
             </View>
 
