@@ -14,5 +14,6 @@ import {AppRegistry} from "react-native";
 // import Start from './component/Components';
 // import Start from './scene/SimpleNavigationApp';
 // import Start from './btn/Buttons';
-import Start from './fetch/FetchDemo';
+// import Start from './fetch/FetchDemo';
+import Start from './login/Login';
 AppRegistry.registerComponent('HelloRN', () => Start);
