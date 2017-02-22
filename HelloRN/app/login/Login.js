@@ -15,6 +15,23 @@ import {
 } from 'react-native';
 
 export default class Login extends Component {
+    constructor(props){
+        super(props);
+        this.state = {title:'ni'};
+    }
+    fetchData = () => {
+        fetch('http://119.29.154.236:8080/LoginWeb/login?userName=admin&password=123456')
+            .then((response) => response.text())
+            .then((responseText) => {
+                this.setState({
+                    title: responseText.text,
+                });
+                alert(this.state.title);
+            })
+            .catch((error) =>{
+            alert(error);
+            });
+    };
     render() {
         return (
             <View style={styles.container}>
@@ -23,11 +40,10 @@ export default class Login extends Component {
                 placeholder={'用户名'}/>
                 <TextInput style={styles.textInput}
                 underlineColorAndroid={'transparent'}
-                           ref="ti1"
                            placeholder={'密码'}
                 />
                 <TouchableOpacity style={styles.button}
-                                  onPress={() => {alert(1)}}
+                                  onPress={this.fetchData}
                 >
                     <Text style={{color:'white'}}>登录</Text>
                 </TouchableOpacity>
