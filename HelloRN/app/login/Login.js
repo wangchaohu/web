@@ -17,16 +17,16 @@ import {
 export default class Login extends Component {
     constructor(props){
         super(props);
-        this.state = {title:'ni'};
+        this.state = {text:'登录'};
     }
     fetchData = () => {
-        fetch('http://119.29.154.236:8080/LoginWeb/login?userName=admin&password=123456')
+        fetch('http://www.baidu.com')
             .then((response) => response.text())
             .then((responseText) => {
                 this.setState({
-                    title: responseText.text,
+                    text:"注册",
                 });
-                alert(this.state.title);
+                alert(this.state.text);
             })
             .catch((error) =>{
             alert(error);
@@ -45,7 +45,7 @@ export default class Login extends Component {
                 <TouchableOpacity style={styles.button}
                                   onPress={this.fetchData}
                 >
-                    <Text style={{color:'white'}}>登录</Text>
+                    <Text style={{color:'white'}}>{this.state.text}</Text>
                 </TouchableOpacity>
             </View>
         );
