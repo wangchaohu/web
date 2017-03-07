@@ -9,11 +9,12 @@ import {
     AppRegistry,
     ListView,
     StyleSheet,
-    View,TouchableHighlight,
+    View,
+    TouchableHighlight,
     Text,
 } from 'react-native';
 
-import item from './ListViewItem';
+import Item from './ListViewItem';
 
 export default class MyAccount extends Component {
     constructor(props){
@@ -22,12 +23,12 @@ export default class MyAccount extends Component {
         this.state = {
           dataSource : ds.cloneWithRows(this._getRowData()),
         };
-
-        //bind,必须有
-        this._renderRow = this._renderRow.bind(this);
+        //
+        // //bind,必须有
+        // this._renderRow = this._renderRow.bind(this);
     }
 
-    _getRowData(){
+    _getRowData = () =>{
         const data = [];
       for(var i =0; i < 100; i++) {
           data.push("我是列表数据:" + i);
@@ -38,44 +39,39 @@ export default class MyAccount extends Component {
     /*渲染行*/
     _renderRow = (rowData: string, sectionID: number, rowID: number) =>{
 return(
-    <item
+    <Item
     onSelect = {() =>{
-        this._pressRow(rowID);
+        this._pressRow(rowID, sectionID);
     }}
-    rowData = {rowData}
+    data = {rowData}
     />
 );
     };
 
     /*点击事件*/
-    _pressRow = (rowId) =>{
-        alert(rowId);
+    _pressRow = (rowId,sectionId) =>{
+        alert(rowId + "    " + sectionId);
 };
 
     /*渲染分割线*/
 
-    // _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
-    //     return (
-    //         <View key={`{sectionID}-${rowID}`}
-    //               style={{height: 1, backgroundColor: 'black'}}>
-    //         </View>
-    //     );
-    // }
+    _renderSeparator(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
+        return (
+            <View key={`{sectionID}-${rowID}`}
+                  style={{height: 1, backgroundColor: 'black'}}>
+            </View>
+        );
+    }
 
     render() {
         return (
             <ListView
             dataSource={this.state.dataSource}
-            renderRow={this._renderRow}
+            enableEmptySections={true}
+            initialListSize={11}
+            renderRow={this._renderRow.bind(this)}
+            renderSeparator={this._renderSeparator.bind(this)}
             />
         );
     }
 }
-
-// var styles = StyleSheet.create({
-//     item_style:{
-//         height:50,
-//         justifyContent:'center',
-//         alignItems:'center',
-//     },
-// });
