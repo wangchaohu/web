@@ -22,6 +22,7 @@ export default class ListViewItem extends Component {
     };
 
     render() {
+        //解构
         const {data,onSelect} = this.props;
         return (
 

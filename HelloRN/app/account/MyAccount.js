@@ -19,20 +19,43 @@ import Item from './ListViewItem';
 export default class MyAccount extends Component {
     constructor(props){
         super(props);
-        var ds = new ListView.DataSource({rowHasChanged:(r1, r2) => r1 !== r2});     //只更新变化的行
+        var ds = new ListView.DataSource({
+            getSectionData:sectionData,
+            getRowData:rowData,
+            rowHasChanged:(r1,r2) => r1 !== r2,
+            sectionHeaderHasChanged:(s1,s2) => s1 !== s2
+        });     //只更新变化的行
         this.state = {
-          dataSource : ds.cloneWithRows(this._getRowData()),
+          dataSource : ds.cloneWithRowsAndSections({'section1':['1','2','3'],'section2':['row1','row2','row1','row2','row1','row2','row1','row2'],"section3":this._getRowData(), })
         };
-        //
-        // //bind,必须有
-        // this._renderRow = this._renderRow.bind(this);
+
+
     }
+
+    getInitialState = () =>{
+        var sectionData = (dataBlob,sectionID) => {
+            return dataBlob[sectionID];
+        };
+        var rowData = (dataBlob,sectionID,rowID) => {
+            return dataBlob[sectionID + ':' + rowID];
+        };
+
+        return{
+
+        }
+    };
 
     _getRowData = () =>{
         const data = [];
-      for(var i =0; i < 100; i++) {
+      for(var i =0; i < 10; i++) {
           data.push("我是列表数据:" + i);
       }
+      for (var i = 0; i < 20; i++){
+          data.push("你是列表：" + i);
+      }
+        for (var i = 0; i < 30; i++){
+            data.push("ta是列表：" + i);
+        }
       return data;
     };
 
@@ -42,7 +65,8 @@ return(
     <Item
     onSelect = {() =>{
         this._pressRow(rowID, sectionID);
-    }}
+    }
+    }
     data = {rowData}
     />
 );
@@ -61,7 +85,16 @@ return(
                   style={{height: 1, backgroundColor: 'black'}}>
             </View>
         );
-    }
+    };
+
+    /*  渲染粘性标题*/
+    _renderSectionHeader = (sectionData, sectionID) =>{
+        return(
+            <Text>
+                {sectionData}
+            </Text>
+        );
+    };
 
     render() {
         return (
@@ -69,8 +102,9 @@ return(
             dataSource={this.state.dataSource}
             enableEmptySections={true}
             initialListSize={11}
-            renderRow={this._renderRow.bind(this)}
-            renderSeparator={this._renderSeparator.bind(this)}
+            renderRow={this._renderRow}
+            renderSeparator={this._renderSeparator}
+            renderSectionHeader={this._renderSectionHeader}
             />
         );
     }
