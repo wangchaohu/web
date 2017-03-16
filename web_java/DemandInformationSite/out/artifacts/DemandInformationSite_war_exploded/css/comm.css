@@ -1,0 +1,10 @@
+/*把通用的样式写到该文件下.
+
+*/
+
+body{
+    margin: 0 auto;  /*边距清0  并居中*/
+    padding:0;
+    width:800px;
+    background-color: blue;
+}
